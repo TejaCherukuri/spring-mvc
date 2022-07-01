@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+                           
+       <context:component-scan base-package="com.home"></context:component-scan>
+       
+       <!-- Configuring ViewResolver -->
+       
+       <!-- Takes in SugarView from DispatcherServlet and return /WEB-INF/view/SugarView.jsp to DispatcherServlet
+      		Client -> Rest API Call -> DispatcherServlet -> Required Controller's Handler Method
+       		View is returned by Handler Method -> But DS doesn't know what type of view it is -> contacts ViewResolver
+       		-> ViewResolver adds prefix and suffix to the View name returned by COntroller Handler method and sends it back to DS
+       		-> DS will serve this to client in a Browser 
+       	-->
+       
+       <!-- There are many ViewResolver classes defined in Spring, we are using InternalResourceViewResolver -->
+       <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+       		<property name = "prefix" value = "/WEB-INF/view/"></property> <!--  This is a setter based dependency injection -->
+       		<property name = "suffix" value = ".jsp"></property>
+       </bean>
+
+</beans>
